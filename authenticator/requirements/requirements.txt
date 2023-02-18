@@ -1,0 +1,12 @@
+django
+djangorestframework
+drf-spectacular
+gunicorn
+django-filter
+django-cors-headers
+python-decouple
+psycopg2-binary
+requests
+pytest-django
+pytest-mock
+pytest-cov
