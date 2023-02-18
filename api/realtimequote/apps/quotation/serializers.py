@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from quotation.models import Quotation
+from apps.quotation.models import Quotation
 
 
 class QuotationSerializer(serializers.ModelSerializer):

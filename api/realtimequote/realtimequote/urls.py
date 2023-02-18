@@ -23,8 +23,8 @@ from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
 from rest_framework import routers
 
 from realtimequote import settings
-from coin import views as coin_router
-from quotation import views as quotation_router
+from apps.coin import views as coin_router
+from apps.quotation import views as quotation_router
 
 router = routers.DefaultRouter()
 router.register("coin", coin_router.CoinView)

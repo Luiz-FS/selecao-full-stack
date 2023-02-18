@@ -1,6 +1,6 @@
 from django.db import models
 from realtimequote.base_model import BaseModel
-from coin.models import Coin
+from apps.coin.models import Coin
 
 class Quotation(BaseModel):
     coin = models.ForeignKey(Coin, on_delete=models.CASCADE)

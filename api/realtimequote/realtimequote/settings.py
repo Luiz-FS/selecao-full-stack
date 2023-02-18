@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from celery.schedules import crontab
+from datetime import timedelta
 from decouple import config
 from urllib.parse import urlparse
 from kombu import Exchange, Queue
@@ -83,8 +85,8 @@ THIRD_PARTY_APPS = [
 
 
 LOCAL_APPS = [
-    'coin.apps.CoinConfig',
-    'quotation.apps.QuotationConfig'
+    'apps.coin.apps.CoinConfig',
+    'apps.quotation.apps.QuotationConfig'
 ]
 
 
@@ -171,6 +173,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Celery Configuration Global
 # https://docs.celeryproject.org/en/latest/userguide/configuration.html
 CELERY_BROKER_URL = BROKER_URL
@@ -204,6 +207,14 @@ CELERY_TASK_QUEUES = (
         routing_key="task-collect-coin-quotation",
     ),
 )
+
+# Celery Beat Schedule
+CELERY_BEAT_SCHEDULE = {
+    "task-collect-coin-quotation": {
+        "task": "apps.coin.tasks.collect_coin_quotation",
+        "schedule": timedelta(seconds=30),
+    },
+}
 
 
 # Internationalization
