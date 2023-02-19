@@ -22,7 +22,7 @@ from kombu import Exchange, Queue
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 DB_URI = config(
-    "DB_URI", default="postgresql://postgres:postgres@localhost/tradex", cast=str
+    "DB_URI", default="postgresql://postgres:postgres@localhost/realtimequote", cast=str
 )
 AUTHENTICATOR_URI = config(
     "AUTHENTICATOR_URI", default="http://localhost:8001", cast=str
@@ -34,6 +34,8 @@ DB_PASS = uri_params.password
 DB_NAME = uri_params.path.strip("/")
 BROKER_URL = config("BROKER_URL", default="amqp://root:secret@localhost:5672//", cast=str)
 ENVIRONMENT = config("SIMPLE_SETTINGS", "realtimequote.realtimequote.settings").split(".")[-1:][0]
+AWESOMEAPI_URL = config("AWESOMEAPI_URL", default="https://economia.awesomeapi.com.br", cast=str)
+KRAKEN_API_URL = config("KRAKEN_API_URL", default="https://api.kraken.com", cast=str)
 
 
 # Django timezones and languages settings
