@@ -1,12 +1,7 @@
 from celery import Task
 from realtimequote.celery import app
-from backends.awesomeapi_quote_refresh_api import AwesomeapiQuoteRefresh
+from realtimequote.coin_refresh_api_map import COIN_TO_BACKEND_API
 from apps.coin.repository import CoinRepository
-
-
-COIN_TO_BACKEND_API = {
-    "BRL / USD": AwesomeapiQuoteRefresh(name="BRL / USD", key="USD-BRL", data_key="USDBRL")
-}
 
 
 @app.task(
