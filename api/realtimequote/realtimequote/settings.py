@@ -36,6 +36,7 @@ BROKER_URL = config("BROKER_URL", default="amqp://root:secret@localhost:5672//",
 ENVIRONMENT = config("SIMPLE_SETTINGS", "realtimequote.realtimequote.settings").split(".")[-1:][0]
 AWESOMEAPI_URL = config("AWESOMEAPI_URL", default="https://economia.awesomeapi.com.br", cast=str)
 KRAKEN_API_URL = config("KRAKEN_API_URL", default="https://api.kraken.com", cast=str)
+REDIS_URL = config("REDIS_URL", default="redis://127.0.0.1:6379", cast=str)
 
 
 # Django timezones and languages settings
@@ -175,6 +176,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': REDIS_URL,
+    }
+}
+
 
 # Celery Configuration Global
 # https://docs.celeryproject.org/en/latest/userguide/configuration.html
@@ -208,6 +216,11 @@ CELERY_TASK_QUEUES = (
         exchange=Exchange("task-collect-coin-quotation", type="direct"),
         routing_key="task-collect-coin-quotation",
     ),
+    Queue(
+        name="task-collect-coin-quotation-history",
+        exchange=Exchange("task-collect-coin-quotation-history", type="direct"),
+        routing_key="task-collect-coin-quotation-history",
+    ),
 )
 
 # Celery Beat Schedule
@@ -215,6 +228,11 @@ CELERY_BEAT_SCHEDULE = {
     "task-collect-coin-quotation": {
         "task": "apps.coin.tasks.collect_coin_quotation",
         "schedule": timedelta(seconds=30),
+    },
+    "task-collect-coin-quotation-history": {
+        "task": "apps.quotation.tasks.collect_coin_quotation_history",
+        "schedule": timedelta(minutes=1),
+        "args": (30,),
     },
 }
 

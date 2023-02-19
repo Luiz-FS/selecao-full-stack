@@ -16,3 +16,4 @@ pytest-django
 pytest-mock
 pytest-cov
 pydantic
+redis[hiredis]
