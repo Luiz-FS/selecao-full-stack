@@ -1,20 +1,17 @@
 import requests
 from decimal import Decimal
+from datetime import datetime
 
 from backends.coin_quote_refresh_backend import CoinQuoteRefreshBackend
 from apps.coin.schemas import CoinSchema
-from realtimequote.settings import AWESOMEAPI_URL
+from apps.quotation.schemas import QuotationSchema
+from simple_settings import settings
 
 
 class AwesomeapiQuoteRefresh(CoinQuoteRefreshBackend):
-    data_key: str
-
-    def __init__(self, name, key, data_key):
-        super().__init__(name, key)
-        self.data_key = data_key
 
     def get_current_quote(self) -> CoinSchema:
-        url = f"{AWESOMEAPI_URL}/json/last/{self.key}"
+        url = f"{settings.AWESOMEAPI_URL}/json/last/{self.key}"
 
         response = requests.get(url)
         data = response.json()
@@ -25,5 +22,20 @@ class AwesomeapiQuoteRefresh(CoinQuoteRefreshBackend):
         )
 
     
-    def get_quote_history(self):
-        raise NotImplementedError()
+    def get_quote_history(self, days: int=1) -> list[QuotationSchema]:
+        url = f"{settings.AWESOMEAPI_URL}/json/daily/{self.key}/{days}"
+
+        response = requests.get(url)
+        data = response.json()
+
+        return list(
+            map(
+                lambda coin_quote: QuotationSchema(
+                    min_price=Decimal(coin_quote["low"]),
+                    max_price=Decimal(coin_quote["high"]),
+                    variance=Decimal(coin_quote["pctChange"]),
+                    create_date=datetime.fromtimestamp(int(coin_quote["timestamp"])).date()
+                ),
+                data
+            )
+        )
