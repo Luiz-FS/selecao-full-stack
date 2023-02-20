@@ -16,6 +16,6 @@ class QuotationViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["coin__id", "create_date"]
 
-    @method_decorator(cache_page(60*60*24))
+    @method_decorator(cache_page(60))
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)

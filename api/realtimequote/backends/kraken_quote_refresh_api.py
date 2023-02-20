@@ -1,4 +1,3 @@
-import requests
 from decimal import Decimal
 from simple_settings import settings
 
@@ -6,6 +5,7 @@ from backends.coin_quote_refresh_backend import CoinQuoteRefreshBackend
 from backends.awesomeapi_quote_refresh_api import AwesomeapiQuoteRefresh
 from apps.coin.schemas import CoinSchema
 from apps.quotation.schemas import QuotationSchema
+from utils import requests
 
 
 class KrakenQuoteRefresh(CoinQuoteRefreshBackend):
@@ -18,8 +18,7 @@ class KrakenQuoteRefresh(CoinQuoteRefreshBackend):
     def get_current_quote(self) -> CoinSchema:
         url = f"{settings.KRAKEN_API_URL}/0/public/Ticker?pair={self.key}"
 
-        response = requests.get(url)
-        data = response.json()
+        data = requests.get(url)
 
         return CoinSchema(
             name=self.name,

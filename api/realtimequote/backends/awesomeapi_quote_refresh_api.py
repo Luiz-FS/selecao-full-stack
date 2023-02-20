@@ -1,10 +1,10 @@
-import requests
 from decimal import Decimal
 from datetime import datetime
 
 from backends.coin_quote_refresh_backend import CoinQuoteRefreshBackend
 from apps.coin.schemas import CoinSchema
 from apps.quotation.schemas import QuotationSchema
+from utils import requests
 from simple_settings import settings
 
 
@@ -13,8 +13,7 @@ class AwesomeapiQuoteRefresh(CoinQuoteRefreshBackend):
     def get_current_quote(self) -> CoinSchema:
         url = f"{settings.AWESOMEAPI_URL}/json/last/{self.key}"
 
-        response = requests.get(url)
-        data = response.json()
+        data = requests.get(url)
 
         return CoinSchema(
             name=self.name,
@@ -25,8 +24,7 @@ class AwesomeapiQuoteRefresh(CoinQuoteRefreshBackend):
     def get_quote_history(self, days: int=1) -> list[QuotationSchema]:
         url = f"{settings.AWESOMEAPI_URL}/json/daily/{self.key}/{days}"
 
-        response = requests.get(url)
-        data = response.json()
+        data = requests.get(url)
 
         return list(
             map(
