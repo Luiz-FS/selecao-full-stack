@@ -1,0 +1,41 @@
+version: "3"
+services:
+
+  celery-worker:
+    build: ./api
+    command: celery -A realtimequote worker -l INFO
+    depends_on:
+      - authenticator
+    environment:
+      - DEBUG=True
+      - DB_URI=postgresql://postgres:postgres@db:5432/realtimequote
+      - SIMPLE_SETTINGS=realtimequote.settings
+      - DJANGO_SETTINGS_MODULE=realtimequote.settings
+      - BROKER_URL=amqp://root:secret@rabbitmq:5672//
+      - REDIS_URL=redis://redis:6379
+    networks:
+      - default
+    restart: on-failure
+  
+  celery-beat:
+    build: ./api
+    command: celery -A realtimequote beat -l INFO
+    depends_on:
+      - authenticator
+    environment:
+      - DEBUG=True
+      - DB_URI=postgresql://postgres:postgres@db:5432/realtimequote
+      - SIMPLE_SETTINGS=realtimequote.settings
+      - DJANGO_SETTINGS_MODULE=realtimequote.settings
+      - BROKER_URL=amqp://root:secret@rabbitmq:5672//
+      - REDIS_URL=redis://redis:6379
+    networks:
+      - default
+    restart: on-failure
+
+volumes:
+  static:
+
+networks:
+  default:
+    driver: bridge
