@@ -1,6 +1,6 @@
+from apps.coin.models import Coin
 from apps.quotation.models import Quotation
 from apps.quotation.schemas import QuotationSchema
-from apps.coin.models import Coin
 
 
 class QuotationRepository:

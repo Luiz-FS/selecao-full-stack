@@ -13,17 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+from apps.coin import views as coin_router
+from apps.quotation import views as quotation_router
 from django.conf.urls.static import static
-from django.urls import path
-
+from django.contrib import admin
 from django.urls import include, path
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
+                                   SpectacularSwaggerView)
 from rest_framework import routers
 
 from realtimequote import settings
-from apps.coin import views as coin_router
-from apps.quotation import views as quotation_router
 
 router = routers.DefaultRouter()
 router.register("coin", coin_router.CoinView)

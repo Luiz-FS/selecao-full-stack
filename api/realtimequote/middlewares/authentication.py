@@ -1,9 +1,10 @@
-import requests
 from http import HTTPStatus
+
+import requests
 from django.contrib.auth.models import User
-from rest_framework import authentication
-from rest_framework import exceptions
 from drf_spectacular.extensions import OpenApiAuthenticationExtension
+from rest_framework import authentication, exceptions
+
 from realtimequote import settings
 
 

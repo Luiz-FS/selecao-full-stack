@@ -1,10 +1,11 @@
-import pytest
-from decimal import Decimal
 from datetime import datetime
-from django.contrib.auth.models import User
+from decimal import Decimal
+
+import pytest
 from apps.coin.models import Coin
 from apps.quotation.models import Quotation
 from backends.coin_quote_refresh_backend import CoinQuoteRefreshBackend
+from django.contrib.auth.models import User
 
 
 class ResponseMock:

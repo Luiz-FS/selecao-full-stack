@@ -1,11 +1,12 @@
-import pytest
 from datetime import datetime
-from celery.exceptions import MaxRetriesExceededError
 from decimal import Decimal
-from apps.quotation import tasks
-from apps.quotation.tasks import collect_coin_quotation_history
-from apps.quotation.schemas import QuotationSchema
+
+import pytest
 from apps.coin.models import Coin
+from apps.quotation import tasks
+from apps.quotation.schemas import QuotationSchema
+from apps.quotation.tasks import collect_coin_quotation_history
+from celery.exceptions import MaxRetriesExceededError
 from utils.requests import RequestExeption
 
 

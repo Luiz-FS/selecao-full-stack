@@ -1,6 +1,7 @@
-from django.db import models
-from realtimequote.base_model import BaseModel
 from apps.coin.models import Coin
+from django.db import models
+
+from realtimequote.base_model import BaseModel
 
 
 class Quotation(BaseModel):

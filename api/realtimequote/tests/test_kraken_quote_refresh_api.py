@@ -1,6 +1,7 @@
-import pytest
-from decimal import Decimal
 from datetime import datetime
+from decimal import Decimal
+
+import pytest
 from apps.coin.schemas import CoinSchema
 from apps.quotation.schemas import QuotationSchema
 from backends.kraken_quote_refresh_api import KrakenQuoteRefresh

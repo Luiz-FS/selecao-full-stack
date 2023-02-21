@@ -1,11 +1,11 @@
-from rest_framework import viewsets
+from apps.quotation.models import Quotation
+from apps.quotation.serializers import QuotationSerializer
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import IsAuthenticated
 from middlewares.authentication import JWTAuthentication
-from apps.quotation.serializers import QuotationSerializer
-from apps.quotation.models import Quotation
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 
 class QuotationViewSet(viewsets.ReadOnlyModelViewSet):

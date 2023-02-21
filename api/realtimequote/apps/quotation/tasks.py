@@ -1,11 +1,12 @@
 import logging
-from celery import Task
-from realtimequote.celery import app
-from realtimequote.coin_refresh_api_map import COIN_TO_BACKEND_API
+
 from apps.coin.repository import CoinRepository
 from apps.quotation.repository import QuotationRepository
+from celery import Task
 from utils import requests
 
+from realtimequote.celery import app
+from realtimequote.coin_refresh_api_map import COIN_TO_BACKEND_API
 
 logger = logging.getLogger(__name__)
 

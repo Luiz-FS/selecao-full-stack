@@ -1,13 +1,12 @@
 import logging
 from decimal import Decimal
-from simple_settings import settings
 
-from backends.coin_quote_refresh_backend import CoinQuoteRefreshBackend
-from backends.awesomeapi_quote_refresh_api import AwesomeapiQuoteRefresh
 from apps.coin.schemas import CoinSchema
 from apps.quotation.schemas import QuotationSchema
+from backends.awesomeapi_quote_refresh_api import AwesomeapiQuoteRefresh
+from backends.coin_quote_refresh_backend import CoinQuoteRefreshBackend
+from simple_settings import settings
 from utils import requests
-
 
 logger = logging.getLogger(__name__)
 

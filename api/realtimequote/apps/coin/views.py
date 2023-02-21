@@ -1,11 +1,11 @@
-from rest_framework import viewsets
+from apps.coin.models import Coin
+from apps.coin.serializers import CoinSerializer
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import IsAuthenticated
 from middlewares.authentication import JWTAuthentication
-from apps.coin.serializers import CoinSerializer
-from apps.coin.models import Coin
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 
 class CoinView(viewsets.ReadOnlyModelViewSet):

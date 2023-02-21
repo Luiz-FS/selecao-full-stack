@@ -1,7 +1,8 @@
-import pytest
-from middlewares.authentication import JWTAuthentication
 from http import HTTPStatus
+
+import pytest
 from django.contrib.auth.models import User
+from middlewares.authentication import JWTAuthentication
 from rest_framework import exceptions
 from simple_settings import settings
 

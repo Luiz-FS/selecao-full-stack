@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from apps.coin.models import Coin
+from rest_framework import serializers
 
 
 class CoinSerializer(serializers.ModelSerializer):

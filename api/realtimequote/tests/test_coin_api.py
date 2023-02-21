@@ -1,5 +1,6 @@
-import pytest
 from http import HTTPStatus
+
+import pytest
 from apps.coin.serializers import CoinSerializer
 
 

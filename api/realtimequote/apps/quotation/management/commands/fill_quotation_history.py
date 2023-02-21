@@ -1,5 +1,5 @@
-from django.core.management.base import BaseCommand
 from apps.quotation.tasks import collect_coin_quotation_history
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):

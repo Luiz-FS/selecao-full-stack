@@ -1,6 +1,7 @@
-import pytest
 from datetime import datetime
 from decimal import Decimal
+
+import pytest
 from apps.coin.models import Coin
 from apps.quotation.models import Quotation
 from apps.quotation.repository import QuotationRepository

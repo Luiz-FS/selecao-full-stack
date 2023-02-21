@@ -1,4 +1,5 @@
 from abc import ABC, abstractclassmethod
+
 from apps.coin.schemas import CoinSchema
 from apps.quotation.schemas import QuotationSchema
 

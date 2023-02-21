@@ -1,5 +1,5 @@
-from django.contrib import admin
 from apps.quotation.models import Quotation
+from django.contrib import admin
 
 
 @admin.register(Quotation)

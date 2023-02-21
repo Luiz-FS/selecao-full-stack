@@ -1,7 +1,8 @@
-import pytest
 from decimal import Decimal
-from apps.coin.repository import CoinRepository
+
+import pytest
 from apps.coin.models import Coin
+from apps.coin.repository import CoinRepository
 from apps.coin.schemas import CoinSchema
 
 

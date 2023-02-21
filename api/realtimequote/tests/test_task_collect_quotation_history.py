@@ -1,9 +1,10 @@
-import pytest
-from celery.exceptions import MaxRetriesExceededError
 from decimal import Decimal
+
+import pytest
 from apps.coin import tasks
-from apps.coin.tasks import collect_coin_quotation
 from apps.coin.schemas import CoinSchema
+from apps.coin.tasks import collect_coin_quotation
+from celery.exceptions import MaxRetriesExceededError
 from utils.requests import RequestExeption
 
 

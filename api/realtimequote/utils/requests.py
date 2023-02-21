@@ -1,6 +1,7 @@
+from http import HTTPStatus
+
 import requests
 from requests import ConnectionError, Timeout
-from http import HTTPStatus
 
 
 class RequestExeption(Exception):

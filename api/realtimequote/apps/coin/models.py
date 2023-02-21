@@ -1,4 +1,5 @@
 from django.db import models
+
 from realtimequote.base_model import BaseModel
 
 
