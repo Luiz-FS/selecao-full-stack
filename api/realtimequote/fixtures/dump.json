@@ -1,0 +1,53 @@
+[
+{
+    "model": "coin.coin",
+    "pk": "36295063-f918-4ca1-8805-186404f42f90",
+    "fields": {
+        "created_at": "2023-02-18T20:50:19.595Z",
+        "updated_at": "2023-02-18T20:50:19.595Z",
+        "name": "BRL / USD",
+        "description": "Dolar Americano",
+        "price": "5.1674"
+    }
+},
+{
+    "model": "coin.coin",
+    "pk": "4ad372f9-6ff3-4b0e-b099-bfece3a640af",
+    "fields": {
+        "created_at": "2023-02-19T00:56:20.452Z",
+        "updated_at": "2023-02-19T00:56:20.452Z",
+        "name": "BTC / USD",
+        "description": "Bitcoin/Dolar Americano",
+        "price": "24597.9000"
+    }
+},
+{
+    "model": "coin.coin",
+    "pk": "6bffd66d-8f70-4077-b8ba-c237f4bed70c",
+    "fields": {
+        "created_at": "2023-02-19T00:55:21.824Z",
+        "updated_at": "2023-02-19T00:55:21.824Z",
+        "name": "BTC / EUR",
+        "description": "Bitcoin/Euro",
+        "price": "23104.7000"
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$jR6n2HRGUCstuBNTiBxEfl$QsqpDfRIRMwL1H+7wabjZvYQiQnjOTunezJJqPH3FZM=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "root",
+        "first_name": "",
+        "last_name": "",
+        "email": "root@email.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-02-21T12:19:18.550Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
