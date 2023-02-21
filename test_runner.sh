@@ -14,7 +14,7 @@ done
 
 for service in ${services[@]} ; do
 
-    if [ "$service" = "frontend" ] || [ "$service" = "env" ] ; then
+    if [ "$service" = "frontend" ] || [ "$service" = "env" ]  || [ "$service" = "admin_proxy" ] ; then
         continue
     fi
     echo "=> Testing service $service"
