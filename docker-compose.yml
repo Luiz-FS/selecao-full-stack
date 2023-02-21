@@ -1,6 +1,20 @@
 version: "3"
 services:
 
+  admin-proxy:
+    build:
+      context: ./admin_proxy
+    depends_on:
+      - api
+      - authenticator
+    ports:
+      - "8082:80"
+    restart: on-failure
+    networks:
+      - default
+    volumes:
+      - static:/opt/app/static/
+
   api:
     build: ./api
     command: gunicorn -b :8000 realtimequote.wsgi:application
@@ -8,15 +22,17 @@ services:
       - authenticator
     environment:
       - DEBUG=True
-      - DB_URI=postgresql://postgres:postgres@db:5432/tradex
+      - DB_URI=postgresql://postgres:postgres@db:5432/realtimequote
       - AUTHENTICATOR_URI=http://authenticator:8000
-      - PROCESS_AREA=/opt/process_area
+      - SIMPLE_SETTINGS=realtimequote.settings
+      - DJANGO_SETTINGS_MODULE=realtimequote.settings
+      - BROKER_URL=amqp://root:secret@rabbitmq:5672//
+      - REDIS_URL=redis://redis:6379
     ports:
       - "8000:8000"
     networks:
       - default
     volumes:
-      - process_area:/opt/process_area/
       - static:/app/static/
     restart: on-failure
   
@@ -33,7 +49,6 @@ services:
     restart: on-failure
 
 volumes:
-  process_area:
   static:
 
 networks:
