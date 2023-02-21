@@ -20,7 +20,7 @@ def collect_coin_quotation(self: Task) -> None:
             CoinRepository.update_current_quote(current_quote)
         except requests.RequestExeption as e:
             print(e)
-            self.retry(countdown=2)
+            return self.retry(countdown=2)
         except Exception as e:
             raise e
 

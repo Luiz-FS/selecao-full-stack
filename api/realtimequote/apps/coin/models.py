@@ -8,7 +8,7 @@ class Coin(BaseModel):
     description = models.CharField(max_length=250)
     price = models.DecimalField(max_digits=16 ,decimal_places=4, null=False, blank=False)
 
-    def __str__(self):
+    def __str__(self):  # pragma nocover
         return self.name
 
     class Meta:

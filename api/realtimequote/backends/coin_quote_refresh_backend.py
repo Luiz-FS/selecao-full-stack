@@ -14,8 +14,8 @@ class CoinQuoteRefreshBackend(ABC):
         self.data_key = data_key
 
     @abstractclassmethod
-    def get_current_quote(self) -> CoinSchema:
+    def get_current_quote(self) -> CoinSchema:  # pragma nocover
         raise NotImplementedError()
     
-    def get_quote_history(self, days: int) -> list[QuotationSchema]:
+    def get_quote_history(self, days: int) -> list[QuotationSchema]:  # pragma nocover
         raise NotImplementedError()
