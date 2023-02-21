@@ -19,4 +19,3 @@ class CoinView(viewsets.ReadOnlyModelViewSet):
     @method_decorator(cache_page(30))
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
-

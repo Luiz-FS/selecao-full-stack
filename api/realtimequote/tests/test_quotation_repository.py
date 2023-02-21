@@ -12,19 +12,16 @@ class TestQuotationRepository:
     def test_bulk_create_quotation(self):
         # arrange
         coin = Coin.objects.create(
-            name="Coin",
-            description="Coin description",
-            price=Decimal("5.64")
+            name="Coin", description="Coin description", price=Decimal("5.64")
         )
         quotations = [
             QuotationSchema(
                 min_price=Decimal("5.00"),
                 max_price=Decimal("5.64"),
                 variance=Decimal("0.2"),
-                create_date=datetime.now().date()
+                create_date=datetime.now().date(),
             )
-
-            for _ in range(10) 
+            for _ in range(10)
         ]
 
         # act

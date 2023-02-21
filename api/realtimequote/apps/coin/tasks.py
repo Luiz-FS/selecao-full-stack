@@ -15,8 +15,7 @@ logger = logging.getLogger(__name__)
     max_retries=5,
 )
 def collect_coin_quotation(self: Task) -> None:
-
-    for (coin_name, backend) in COIN_TO_BACKEND_API.items():
+    for coin_name, backend in COIN_TO_BACKEND_API.items():
         logger.info(f"Collecting {coin_name}...")
 
         try:

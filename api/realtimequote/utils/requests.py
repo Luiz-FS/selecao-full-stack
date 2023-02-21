@@ -15,7 +15,7 @@ def get(url: str) -> dict:
             raise RequestExeption()
 
         data = response.json()
-        
+
         return data
     except (ConnectionError, Timeout) as e:
         raise RequestExeption(e)

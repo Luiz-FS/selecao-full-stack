@@ -25,13 +25,7 @@ class TestRequestsGet:
         with pytest.raises(requests.RequestExeption):
             requests.get("url")
 
-    @pytest.mark.parametrize(
-        "error",
-        [
-            ConnectionError(),
-            Timeout()
-        ]
-    )
+    @pytest.mark.parametrize("error", [ConnectionError(), Timeout()])
     def test_when_expect_raise_request_exception(self, mocker, error):
         # arrange
         request_mock = mocker.patch("utils.requests.requests")

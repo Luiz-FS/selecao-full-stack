@@ -8,7 +8,6 @@ from realtimequote import settings
 
 
 class JWTAuthentication(authentication.BaseAuthentication):
-
     def authenticate_header(self, request):
         return HTTPStatus.UNAUTHORIZED
 
@@ -22,10 +21,10 @@ class JWTAuthentication(authentication.BaseAuthentication):
             return None
 
         response = requests.get(f"{settings.AUTHENTICATOR_URI}/auth/verify?token={token}")
-        
+
         if response.status_code != HTTPStatus.OK:
             raise exceptions.AuthenticationFailed("Invalid auth token!")
-        
+
         data = response.json()
 
         request.session["user"] = data
@@ -36,12 +35,12 @@ class JWTAuthentication(authentication.BaseAuthentication):
 
 
 class JWTAuthenticationScheme(OpenApiAuthenticationExtension):  # pragma nocover
-    target_class = 'middlewares.authentication.JWTAuthentication'
-    name = 'JWTAuth'
+    target_class = "middlewares.authentication.JWTAuthentication"
+    name = "JWTAuth"
 
     def get_security_definition(self, auto_schema):
         return {
-            'type': 'apiKey',
-            'in': 'header',
-            'name': 'Authorization',
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization",
         }

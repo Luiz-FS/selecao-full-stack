@@ -5,4 +5,4 @@ from apps.quotation.models import Quotation
 class QuotationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quotation
-        fields = '__all__'
+        fields = "__all__"

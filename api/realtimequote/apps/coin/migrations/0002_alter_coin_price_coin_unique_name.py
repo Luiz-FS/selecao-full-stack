@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('coin', '0001_initial'),
+        ("coin", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='coin',
-            name='price',
+            model_name="coin",
+            name="price",
             field=models.DecimalField(decimal_places=4, max_digits=10),
         ),
         migrations.AddConstraint(
-            model_name='coin',
-            constraint=models.UniqueConstraint(fields=('name',), name='unique_name'),
+            model_name="coin",
+            constraint=models.UniqueConstraint(fields=("name",), name="unique_name"),
         ),
     ]

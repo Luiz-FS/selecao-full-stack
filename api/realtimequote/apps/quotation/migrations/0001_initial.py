@@ -6,28 +6,35 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('coin', '0001_initial'),
+        ("coin", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Quotation',
+            name="Quotation",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('min_price', models.DecimalField(decimal_places=4, max_digits=8)),
-                ('max_price', models.DecimalField(decimal_places=4, max_digits=8)),
-                ('variance', models.IntegerField()),
-                ('create_date', models.DateField()),
-                ('coin', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='coin.coin')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, primary_key=True, serialize=False
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("min_price", models.DecimalField(decimal_places=4, max_digits=8)),
+                ("max_price", models.DecimalField(decimal_places=4, max_digits=8)),
+                ("variance", models.IntegerField()),
+                ("create_date", models.DateField()),
+                (
+                    "coin",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="coin.coin"),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

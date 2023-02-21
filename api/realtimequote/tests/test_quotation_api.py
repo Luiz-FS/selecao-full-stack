@@ -9,8 +9,10 @@ class TestList:
         # arrange
         authenticator_mock(success=True)
         expected_quotations = QuotationSerializer(make_quotations, many=True).data
-        expected_quotations = sorted(expected_quotations, key=lambda quotation: quotation["create_date"], reverse=True)
-        
+        expected_quotations = sorted(
+            expected_quotations, key=lambda quotation: quotation["create_date"], reverse=True
+        )
+
         for quotation in expected_quotations:
             quotation["coin"] = str(quotation["coin"])
 
@@ -18,9 +20,9 @@ class TestList:
         response = client.get("/api/quotation/")
         data = response.json()
 
-        #assert
+        # assert
         assert expected_quotations == data["results"]
-    
+
     def test_list_quotations_empty(self, client, authenticator_mock):
         # arrange
         authenticator_mock(success=True)
@@ -30,7 +32,7 @@ class TestList:
         response = client.get("/api/quotation/")
         data = response.json()
 
-        #assert
+        # assert
         assert expected_quotations == data["results"]
 
     def test_list_quotations_unauthorized(self, client, authenticator_mock):

@@ -25,16 +25,10 @@ class KrakenQuoteRefresh(CoinQuoteRefreshBackend):
 
         data = requests.get(url)
 
-        return CoinSchema(
-            name=self.name,
-            price=Decimal(data["result"][self.data_key]["a"][0]) 
-        )
+        return CoinSchema(name=self.name, price=Decimal(data["result"][self.data_key]["a"][0]))
 
-    
-    def get_quote_history(self, days: int=1) -> list[QuotationSchema]:
+    def get_quote_history(self, days: int = 1) -> list[QuotationSchema]:
         logger.info(f"Fetching the last {days} days of quote history of {self.name}")
         return AwesomeapiQuoteRefresh(
-            name=self.name,
-            key=self.awesomeapi_coin_key,
-            data_key=""
+            name=self.name, key=self.awesomeapi_coin_key, data_key=""
         ).get_quote_history(days)

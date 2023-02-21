@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('quotation', '0002_alter_quotation_variance'),
+        ("quotation", "0002_alter_quotation_variance"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='quotation',
-            name='max_price',
+            model_name="quotation",
+            name="max_price",
             field=models.DecimalField(decimal_places=4, max_digits=16),
         ),
         migrations.AlterField(
-            model_name='quotation',
-            name='min_price',
+            model_name="quotation",
+            name="min_price",
             field=models.DecimalField(decimal_places=4, max_digits=16),
         ),
     ]

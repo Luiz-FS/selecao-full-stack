@@ -15,9 +15,9 @@ class TestList:
         response = client.get("/api/coin/")
         data = response.json()
 
-        #assert
+        # assert
         assert expected_coins == data["results"]
-    
+
     def test_list_coins_empty(self, client, authenticator_mock):
         # arrange
         authenticator_mock(success=True)
@@ -27,7 +27,7 @@ class TestList:
         response = client.get("/api/coin/")
         data = response.json()
 
-        #assert
+        # assert
         assert expected_coins == data["results"]
 
     def test_list_coins_unauthorized(self, client, authenticator_mock):

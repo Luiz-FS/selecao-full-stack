@@ -18,8 +18,7 @@ from django.conf.urls.static import static
 from django.urls import path
 
 from django.urls import include, path
-from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
-                                   SpectacularSwaggerView)
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
 
 from realtimequote import settings
@@ -32,7 +31,7 @@ router.register("quotation", quotation_router.QuotationViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
-    path('api/admin/', admin.site.urls),
+    path("api/admin/", admin.site.urls),
 ]
 
 
@@ -49,6 +48,4 @@ if settings.DEBUG:
         path(
             "api/docs/schema/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"
         ),
-        
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

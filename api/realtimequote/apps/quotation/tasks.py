@@ -16,8 +16,7 @@ logger = logging.getLogger(__name__)
     max_retries=20,
 )
 def collect_coin_quotation_history(self: Task, days: int) -> None:
-
-    for (coin_name, backend) in COIN_TO_BACKEND_API.items():
+    for coin_name, backend in COIN_TO_BACKEND_API.items():
         logger.info(f"Collecting quotation history from {coin_name}...")
 
         try:

@@ -8,33 +8,25 @@ from simple_settings import settings
 
 
 class TestKrakenQuoteRefresh:
-
     def test_get_current_quote(self, mocker):
         # arrange
-        coin = {
-            "result": {
-                "Coin": {
-                    "a": ["5.64"]
-                }
-            }
-        }
+        coin = {"result": {"Coin": {"a": ["5.64"]}}}
 
-        expected_result = CoinSchema(
-            name="Coin",
-            price=Decimal(coin["result"]["Coin"]["a"][0])
-        )
+        expected_result = CoinSchema(name="Coin", price=Decimal(coin["result"]["Coin"]["a"][0]))
 
         mock_requests = mocker.patch("backends.kraken_quote_refresh_api.requests")
         mock_requests.get.return_value = coin
 
         # act
-        result = KrakenQuoteRefresh(name="Coin", key="Coin", data_key="Coin", awesomeapi_coin_key="Coin").get_current_quote()
+        result = KrakenQuoteRefresh(
+            name="Coin", key="Coin", data_key="Coin", awesomeapi_coin_key="Coin"
+        ).get_current_quote()
 
         # assert
         mock_requests.get.assert_called_with(f"{settings.KRAKEN_API_URL}/0/public/Ticker?pair=Coin")
 
         assert result == expected_result
-    
+
     def test_get_quote_history(self, mocker):
         # arrange
         quotations = [
@@ -42,13 +34,13 @@ class TestKrakenQuoteRefresh:
                 "low": "5.00",
                 "high": "5.64",
                 "pctChange": "0.2",
-                "timestamp": str(int(datetime.now().timestamp()))
+                "timestamp": str(int(datetime.now().timestamp())),
             },
             {
                 "low": "5.10",
                 "high": "5.4",
                 "pctChange": "0.2",
-                "timestamp": str(int(datetime.now().timestamp()))
+                "timestamp": str(int(datetime.now().timestamp())),
             },
         ]
 
@@ -58,9 +50,9 @@ class TestKrakenQuoteRefresh:
                     min_price=Decimal(coin_quote["low"]),
                     max_price=Decimal(coin_quote["high"]),
                     variance=Decimal(coin_quote["pctChange"]),
-                    create_date=datetime.fromtimestamp(int(coin_quote["timestamp"])).date()
+                    create_date=datetime.fromtimestamp(int(coin_quote["timestamp"])).date(),
                 ),
-                quotations
+                quotations,
             )
         )
 
@@ -68,7 +60,9 @@ class TestKrakenQuoteRefresh:
         mock_requests.get.return_value = quotations
 
         # act
-        result = KrakenQuoteRefresh(name="Coin", key="Coin", data_key="Coin", awesomeapi_coin_key="Coin").get_quote_history(days=2)
+        result = KrakenQuoteRefresh(
+            name="Coin", key="Coin", data_key="Coin", awesomeapi_coin_key="Coin"
+        ).get_quote_history(days=2)
 
         # assert
         mock_requests.get.assert_called_with(f"{settings.AWESOMEAPI_URL}/json/daily/Coin/2")

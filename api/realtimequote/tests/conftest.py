@@ -29,7 +29,7 @@ class RequestMock:
 class BackendApiMock(CoinQuoteRefreshBackend):
     def get_current_quote(self):  # pragma nocover
         ...
-    
+
     def get_quote_history(self, days: int):  # pragma nocover
         ...
 
@@ -37,12 +37,7 @@ class BackendApiMock(CoinQuoteRefreshBackend):
 @pytest.fixture
 def make_coins():
     return [
-        Coin.objects.create(
-            name=f"coin{i}",
-            description="Coin description", 
-            price=Decimal(5.64)
-        )
-
+        Coin.objects.create(name=f"coin{i}", description="Coin description", price=Decimal(5.64))
         for i in range(10)
     ]
 
@@ -55,9 +50,8 @@ def make_quotations(make_coins):
             min_price=Decimal(5.00),
             max_price=Decimal(5.64),
             variance=Decimal(0.2),
-            create_date=datetime.now().date()
+            create_date=datetime.now().date(),
         )
-
         for i in range(10)
     ]
 
@@ -65,19 +59,18 @@ def make_quotations(make_coins):
 @pytest.fixture
 def authenticator_mock(mocker):
     def mock_value(success=True):
-        user = User(
-            id=1,
-            email="test@test.com"
-        )
+        user = User(id=1, email="test@test.com")
 
         if success:
             return_value = (user, None)
         else:
             return_value = None
 
-        mocker.patch("middlewares.authentication.JWTAuthentication.authenticate", return_value=return_value)
+        mocker.patch(
+            "middlewares.authentication.JWTAuthentication.authenticate", return_value=return_value
+        )
         return user
-    
+
     return mock_value
 
 
