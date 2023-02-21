@@ -1,3 +1,4 @@
+import logging
 from decimal import Decimal
 from simple_settings import settings
 
@@ -8,6 +9,9 @@ from apps.quotation.schemas import QuotationSchema
 from utils import requests
 
 
+logger = logging.getLogger(__name__)
+
+
 class KrakenQuoteRefresh(CoinQuoteRefreshBackend):
     awesomeapi_coin_key: str
 
@@ -16,6 +20,7 @@ class KrakenQuoteRefresh(CoinQuoteRefreshBackend):
         self.awesomeapi_coin_key = awesomeapi_coin_key
 
     def get_current_quote(self) -> CoinSchema:
+        logger.info(f"Fetching current quote of {self.name}")
         url = f"{settings.KRAKEN_API_URL}/0/public/Ticker?pair={self.key}"
 
         data = requests.get(url)
@@ -27,6 +32,7 @@ class KrakenQuoteRefresh(CoinQuoteRefreshBackend):
 
     
     def get_quote_history(self, days: int=1) -> list[QuotationSchema]:
+        logger.info(f"Fetching the last {days} days of quote history of {self.name}")
         return AwesomeapiQuoteRefresh(
             name=self.name,
             key=self.awesomeapi_coin_key,

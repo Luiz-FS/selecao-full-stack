@@ -1,3 +1,4 @@
+import logging
 from decimal import Decimal
 from datetime import datetime
 
@@ -8,9 +9,13 @@ from utils import requests
 from simple_settings import settings
 
 
+logger = logging.getLogger(__name__)
+
+
 class AwesomeapiQuoteRefresh(CoinQuoteRefreshBackend):
 
     def get_current_quote(self) -> CoinSchema:
+        logger.info(f"Fetching current quote of {self.name}")
         url = f"{settings.AWESOMEAPI_URL}/json/last/{self.key}"
 
         data = requests.get(url)
@@ -22,6 +27,7 @@ class AwesomeapiQuoteRefresh(CoinQuoteRefreshBackend):
 
     
     def get_quote_history(self, days: int=1) -> list[QuotationSchema]:
+        logger.info(f"Fetching the last {days} days of quote history of {self.name}")
         url = f"{settings.AWESOMEAPI_URL}/json/daily/{self.key}/{days}"
 
         data = requests.get(url)

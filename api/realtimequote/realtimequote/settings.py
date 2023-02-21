@@ -231,8 +231,8 @@ CELERY_BEAT_SCHEDULE = {
     },
     "task-collect-coin-quotation-history": {
         "task": "apps.quotation.tasks.collect_coin_quotation_history",
-        "schedule": timedelta(minutes=1),
-        "args": (30,),
+        "schedule": timedelta(days=1),
+        "args": (1,),
     },
 }
 
@@ -259,3 +259,17 @@ STATIC_ROOT = "./static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+}
