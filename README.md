@@ -82,7 +82,7 @@ pasword: secret
 
 ```make run```: Inicia todos os serviços do projeto.
 
-```fill-quotations```: Popula o banco de dados com o histórico de cotações dos ultimos 30 dias.
+```make fill-quotations```: Popula o banco de dados com o histórico de cotações dos ultimos 30 dias.
 
 ```make test```: Executa os testes unitários.
 
