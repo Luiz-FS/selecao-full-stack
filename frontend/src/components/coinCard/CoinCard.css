@@ -1,0 +1,62 @@
+.coin-card-container {
+    padding: 20px;
+    min-width: 250px;
+    width: 25vw;
+    max-width: 350px;
+}
+
+.coin-card-container-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.coin-description-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.coin-description-container p {
+    margin: 0;
+}
+
+.coin-card-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.coin-price-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.coin-card-price-simbol {
+    font-size: 18px;
+    font-weight: 500;
+    color: #828282;
+}
+
+.coin-card-price-value {
+    font-size: 2vw;
+    font-weight: 500;
+    color: #333333;
+}
+
+@media screen and (max-width: 820px) {
+    .coin-card-container {
+        padding: 20px;
+        min-width: 250px;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .coin-card-price-value {
+        font-size: 48px;
+        font-weight: 500;
+        color: #333333;
+    }
+}
