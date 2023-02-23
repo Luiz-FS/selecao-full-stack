@@ -1,59 +1,107 @@
-# Beeteller - Desenvolvedor Full Stack
+# Seleção FullStack
 
-O objetivo dessa atividade é avaliar tecnicamente os candidatos que participam da nossa seleção para vaga de desenvolver Full Stack. O teste é realizado para as vagas de todos os níveis, mas para cada vaga existe critérios mais específicos. 
-Preste bastante atenção nas instruções e boa sorte! :)
+## Fluxo de processamento
 
+O projeto foi construído utilizando o framework Django Rest Framework e ReactJS. Ele está dividido em 4 serviços: A ```API```, que é responsável por listar as moedas, bem como o histórico de cotações dos dias anteriores; O ```Authenticator``` que é responsável por registrar e gerenciar os usuários logados no sistema; O ```Worker``` foi construído usando o `Celery` e é responsável pela comunicação com os serviços externos para atualizar as cotações das moedas; O ```Frontend``` que é responsável por exibir as infromações. Os serviços se comunicam por meio de API Rest e fila de mensageria (`RabbitMQ`). O banco de dados utilizado para persistir as infomações foi o PostgreSQL.
 
-## Instruções
+Basiecamente o ```Frontend``` fará um request para a ```API``` para carregar as informações das moedas salvas bem com do histórico de cotações. A ```Api``` serve apenas para consulta e não faz comunicação com as API's de terceiros para popular a base de dados. Esse serviço é feito no ```Worker``` que periodicamente atualiza os dados do banco com base nas API's externas. O ```Wroker``` é acionado por meio de um CronJob (`Celery Beat`) que periodicamente publica mensagens na fila que o ```Worker```está observando.
 
-Você deverá realizar um clone deste projeto e desenvolver todo o seu código dentro de um repositório e nós enviar o link final. Use o README do seu repositório para explicar um pouco de como foi o desafio, as decisões que você tomou e as instruções para instalar e rodar corretamente o projeto.
+Essa arquitetura foi pensada para tornar o projeto escalável e melhor estruturado, já que como existe comunicação com API's de terceiros que podem ser lentas e ficar fora do ar. Caso essa comunicação fosse feita diretamente pela API, a requisição ficaria lenta e com risco iminente de falhar caso a API externa fique fora do ar ou seja muito lenta.
 
-Sinta-se livre e tente mostrar a sua capacidade nos impressionando, mas não esqueça de atingir os objetivos principais do projeto. Faça o seu melhor!
+Com o ```Worker``` sendo responsável pela comunicação externa, as requisições para a ```API``` ficam muito mais rápidas e o sitema escalável.
 
-## Let's code
+Os fluxos seguem os requisitos mostrados na [especificação do projeto](./README_BASE.md).
 
-Você irá construir uma aplicação, com back-end e front-end separados, para listar cotações em tempo real (periodicamente atualizadas) de algumas moedas utilizando algumas APIs. A aplicação conta com uma tela simples de login para realizar autenticação e um dashboard onde serão mostrados as cotações.
+O diagrama abaixo mostra a arquitetura do projeto explicada:
 
-Como o desafio não é para um designer e sim para um dev, construimos um [protótipo no Figma](https://www.figma.com/file/k7SF69GbpxkgtbaPaSISow/Case?node-id=0%3A1) de como deve ficar a interface do front-end.
-
-Como estamos esperando um projeto de back-end e um de front-end, então o seu front-end precisa consumir a aplicação do back-end.
-
-As APIs que você deve consumir estão abaixo:
-
-* [API de moedas BRL/USD](https://docs.awesomeapi.com.br/api-de-moedas)
-* [API de moedas BTC/EUR](https://api.kraken.com/0/public/Ticker?pair=XBTeur) (primeiro parâmetro da chave `a`)
-* [API de moedas BTC/USD](https://api.kraken.com/0/public/Ticker?pair=XBTusd) (primeiro parâmetro da chave `a`)
-
-De preferência se você tiver domínio, esperamos ver o front-end em Angular ou React, e o backend em NodeJS ou Django. Mas fique a vontade para utilizar outros frameworks se acreditar que o seu desempenho será melhor por isso.
+![seleção fullstack](./arq.jpg)
 
 
-### O que nós esperamos ver no seu desafio
+## Iniciando o projeto
 
-* Ver a utilização do framework da melhor forma possível (metodologia/estrutura).
-* Ver a utilização de dependency managers (npm, webpack, pip, yarn)
-* Rotas de APIs bem estruturadas
-* Separação adequada de responsabilidades (back-end e front-end)
-* Layout responsivo
+### Dependências necessárias
+Antes de executar o projeto é preciso certificar-se de ter algumas depências instaladas. Elas são: ```Python3.9+``` (e o pip caso não esteja instalado), o ```Docker``` e o ```Docker Compose```.
 
-### O que nós ficaríamos felizes de ver em seu teste
+### Executando o projeto
+Depois de instaladas as dependências é possível iniciar o projeto. Para isso execute o seguinte comando:
 
-* Testes unitários e/ou testes de integração
+```shell
+make run
+```
 
-### O que nos impressionaria
+### Criando tabelas no banco e populando com os dados iniciais
+Após certificar-se de ter todas dependências instaladas e o projeto iniciado, é preciso popular o banco de dados com as tabelas que serão utilizadas. Para isso, basta executar na raíz do projeto os comandos:
 
-* Ver o código rodando live (Bucket estático S3, Heroku, Firebase Hosting)
+```shell
+make migrate
+make fill-quotations
+```
 
-### O que nós não gostaríamos
+OBS: Só é necessário executar esses comandos na primeira vez que em for executar o projeto.
 
-* Descobrir que não foi você quem fez seu desafio :(
-* Ver commits grandes, sem muita explicação nas mensagens em seu repositório 
-* Não conseguir rodar a sua aplicação por algum erro de compilação
 
-## O que avaliaremos de seu teste
+## Executando testes unitários
+Para executar os testes unitários é necessário ter as dependências instaladas e o banco de dados construído (já explicado em etapas anteriores). Após isso, basta executar o comando:
 
-* Histórico de commits do git
-* As instruções de como rodar o projeto
-* Estruturação do projeto
-* Organização, semântica, estrutura, legibilidade, manutenibilidade do seu código
-* Alcance dos objetivos propostos
-* Adaptação mobile (layout responsivo)
+```shell
+make test
+```
+
+## Acessando a interface web
+Para acessar a interface web basta acessar a seguinte URL: [http://localhost:8081/](http://localhost:8081/)
+
+OBS:Já existem usuários cadastrados. Eles são: user1@example.com, user2@example.com, user3@example.com e suas senhas são: teste1234.
+
+## Acessando documentação da API
+Para acessar a documetação da api, é preciso executar o projeto e acessar a seguinte url: [http://localhost:8081/api/docs/schema/swagger-ui/](http://localhost:8081/api/docs/schema/swagger-ui/) e para acessar a documentação do serviço de autenticação acesse a seguinte url:  [http://localhost:8081/auth/docs/schema/swagger-ui/](http://localhost:8081/auth/docs/schema/swagger-ui/)
+
+## Fluxo principal de uso
+
+Inicialmente deve-se criar um novo usuário no serviço de autencitação na rota `/auth/register` (Já existem 3 usuários registrados, veja observação  no tópico acima). Após isso é preciso gerar o token de autenticação na rota `/auth/api-token-auth/`.
+Depois de criado o usuário e gerado token, é possível usar a rota de listagem de moedas (`/api/coin/`) e a rota variação cotações (`/api/quotation/`)
+
+OBS: Todas estas rotas podem ser testadas diretamente nas documentações da API.
+
+## Acessando painel admin
+A fim de simular um ambiente de produção real, onde o painel admin é executado em uma url diferente da url da API de modo a gerar maior segurança no sistema, os painels admin dos seviços são executados nas seguintes urls:
+
+
+[API admin](http://localhost:8082/api/admin/)
+
+[Authenticator admin](http://localhost:8082/auth/admin/)
+
+OBS: Credenciais para acessar o painel admin:
+```
+username: root
+pasword: secret
+```
+
+## Lista de comandos
+
+```make migrate```: Inicia o banco de dados PostgreSQL e cria as tabelas necessárias.
+
+```make run```: Inicia todos os serviços do projeto.
+
+```fill-quotations```: Popula o banco de dados com o histórico de cotações dos ultimos 30 dias.
+
+```make test```: Executa os testes unitários.
+
+```make run-dependecies```: Inicia as dependências do projeto.
+
+```make run-celery```: Inicia o woker Celery e o Celery Beat.
+
+```make logs```: Visualiza os logs dos serviços
+
+```make down```: Encerra a execução dos serviços
+
+```make down-dependecies```: Encerra a execução das dependências
+
+```make down-celery```: Encerra a execução dos workers.
+
+```run-api-local```: Inicia a api fora do ambiente Docker.
+
+```run-authenticator-local```: Inicia o authenticator fora do ambiente Docker.
+
+```run-celery-worker-local```: Inicia o worker fora do ambiente do Docker.
+
+```run-celery-beat-local```: Inicia o Celery Beat fora do ambiente do Docker.
