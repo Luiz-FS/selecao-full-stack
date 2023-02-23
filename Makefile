@@ -13,8 +13,7 @@ migrate: run-dependecies
 	docker-compose exec authenticator python manage.py loaddata fixtures/dump.json --app auth.user
 
 fill-quotations:
-	$(call setup_env, api/realtimequote/.env_prod)
-	bash fill_quotations.sh
+	docker-compose exec api python manage.py fill_quotation_history
 
 test: run-dependecies
 	bash test_runner.sh
