@@ -4,8 +4,6 @@ services:
   celery-worker:
     build: ./api
     command: celery -A realtimequote worker -l INFO
-    depends_on:
-      - authenticator
     environment:
       - DEBUG=True
       - DB_URI=postgresql://postgres:postgres@db:5432/realtimequote
@@ -20,8 +18,6 @@ services:
   celery-beat:
     build: ./api
     command: celery -A realtimequote beat -l INFO
-    depends_on:
-      - authenticator
     environment:
       - DEBUG=True
       - DB_URI=postgresql://postgres:postgres@db:5432/realtimequote
