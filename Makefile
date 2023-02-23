@@ -14,7 +14,7 @@ migrate: run-dependecies
 
 fill-quotations:
 	$(call setup_env, api/realtimequote/.env_prod)
-	cd api/realtimequote && python manage.py fill_quotation_history
+	bash fill_quotations.sh
 
 test: run-dependecies
 	bash test_runner.sh
