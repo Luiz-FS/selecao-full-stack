@@ -1,0 +1,12 @@
+.home-coin-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 820px) {
+    .home-coin-container {
+        flex-direction: column;
+        row-gap: 20px;
+    }
+}
