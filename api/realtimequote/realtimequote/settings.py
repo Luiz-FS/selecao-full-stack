@@ -54,6 +54,7 @@ SECRET_KEY = "django-insecure-u)^c2w8nhc*ulj4ih1t0)4(np^_s(0mo*ly23b1pzqei4396^k
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8082', 'http://localhost:8081']
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 CORS_ORIGIN_ALLOW_ALL = True
