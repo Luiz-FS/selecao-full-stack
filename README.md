@@ -98,12 +98,12 @@ pasword: secret
 
 ```make down-celery```: Encerra a execução dos workers.
 
-```run-api-local```: Inicia a api fora do ambiente Docker.
+```make run-api-local```: Inicia a api fora do ambiente Docker.
 
-```run-authenticator-local```: Inicia o authenticator fora do ambiente Docker.
+```make run-authenticator-local```: Inicia o authenticator fora do ambiente Docker.
 
-```run-celery-worker-local```: Inicia o worker fora do ambiente do Docker.
+```make run-celery-worker-local```: Inicia o worker fora do ambiente do Docker.
 
-```run-celery-beat-local```: Inicia o Celery Beat fora do ambiente do Docker.
+```make run-celery-beat-local```: Inicia o Celery Beat fora do ambiente do Docker.
 
-```run-frontend-local```: Inicia o frontend fora do ambiente do Docker.
+```make run-frontend-local```: Inicia o frontend fora do ambiente do Docker.
