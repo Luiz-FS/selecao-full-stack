@@ -33,6 +33,10 @@ run-celery-beat-local:
 	$(call setup_env, api/realtimequote/.env_prod)
 	cd api/realtimequote && celery -A realtimequote beat -l INFO
 
+run-frontend-local:
+	$(call setup_env, frontend/.env.example)
+	cd frontend && npm install && npm start
+
 run-dependecies:
 	docker-compose -f docker-compose-dependecies.yml up -d
 
