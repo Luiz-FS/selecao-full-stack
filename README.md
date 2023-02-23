@@ -105,3 +105,5 @@ pasword: secret
 ```run-celery-worker-local```: Inicia o worker fora do ambiente do Docker.
 
 ```run-celery-beat-local```: Inicia o Celery Beat fora do ambiente do Docker.
+
+```run-frontend-local```: Inicia o frontend fora do ambiente do Docker.
