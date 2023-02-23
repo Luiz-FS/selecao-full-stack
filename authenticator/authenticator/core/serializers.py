@@ -82,9 +82,11 @@ class CustomAuthTokenSerializer(serializers.Serializer):
         username = attrs.get("username")
         password = attrs.get("password")
 
+        user_obj = User.objects.filter(email=username).first()
+
         user = authenticate(
             request=self.context.get("request"),
-            username=username,
+            username=user_obj.username if user_obj else username,
             password=password,
         )
 
