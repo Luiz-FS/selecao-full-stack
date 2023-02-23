@@ -1,0 +1,53 @@
+.css-11xur9t-MuiPaper-root-MuiTableContainer-root {
+    box-shadow: none !important;
+    background-color: rgba(0,0,0,0) !important;
+}
+
+.quotation-table-container {
+    min-width: 700px;
+    border-color: white;
+    -webkit-border-vertical-spacing: 12px !important;
+    -webkit-border-horizontal-spacing: 5px !important;
+    background-color: rgba(0,0,0,0);
+    border-collapse: separate !important;
+}
+
+.quotation-table-container th, tr, td {
+    border-bottom: 0 !important;
+}
+
+.quotation-table-container tbody > tr {
+    background: #FFFFFF;
+    /* Shadown Cards */
+
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.quotation-table-column-name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.quotation-table-column-create-date {
+    margin: 0;
+    font-size: 14px;
+    color: #828282;
+    font-weight: 500;
+}
+
+.quotation-table-column-variance-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.quotation-table-column-variance-span {
+    width: 60px;
+    display: block;
+    height: 37px;
+    text-align: center;
+    line-height: 2;
+    background-color: #F4C23B;
+    border-radius: 8px;
+}
