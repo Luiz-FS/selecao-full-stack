@@ -1,6 +1,18 @@
 version: "3"
 services:
 
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        - REACT_APP_API_URL=/api
+        - REACT_APP_AUTH_URL=/auth
+    depends_on:
+      - api
+    ports:
+      - "8081:80"
+    restart: on-failure
+
   admin-proxy:
     build:
       context: ./admin_proxy
