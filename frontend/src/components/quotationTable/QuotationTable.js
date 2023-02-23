@@ -50,7 +50,7 @@ const QuotationTable = (props) => {
 
     return (
         <div>
-            <TableContainer component={Paper}>
+            <TableContainer className="quotation-table" component={Paper}>
                 <Table className="quotation-table-container" aria-label="customized table">
                     <TableHead>
                         <TableRow>
