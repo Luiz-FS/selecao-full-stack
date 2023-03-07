@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 import {selectIsLoggedIn} from '../../reducers/loginSlice';
 import { selectCoins, loadCoins } from '../../reducers/coinSlice'
 import { selectCount, selectPage, selectRowsPerPage, selectQuotations, setPage, setRowsPerPage, loadQuotations } from '../../reducers/quotationSlice';
-import { CoinCard, QuotationTable } from "../../components"
+import { CoinCard, Page, QuotationTable } from "../../components"
 import './Home.css'
   
 
@@ -68,50 +68,52 @@ const Home = () => {
     }, []);
 
     return (
-        <Container sx={{display: "flex", flexDirection: "column", rowGap: "50px", paddingTop: "40px"}}>
-            {!isLoggedIn && <Navigate to="/login" replace={true}/>}
-            <Box sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                <Typography variant="h4" component="h4" sx={{color: "black", fontWeight: "bold"}}>
-                    Moedas
-                </Typography>
-                <IconButton aria-label="reload" onClick={() => {getCoins()}}>
-                    <CachedIcon/>
-                </IconButton>
-            </Box>
-            <Box className="home-coin-container">
-                {coins.map((coin, i) => <CoinCard name={coin.name} price={coin.price} description={coin.description} key={i}></CoinCard>)}
-            </Box>
-            <Box sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                <Typography variant="h4" component="h4" sx={{color: "black", fontWeight: "bold"}}>
-                    Cotações
-                </Typography>
-                <Select
-                    value={coinSelect}
-                    onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Select Coin' }}
-                    sx={{width: "200px"}}
-                    >
-                    {coins.map((coin, i) => {
-                           return i === 0
-                            ? <MenuItem value={coin.id} key={coin.id} selected={true}>{coin.description}</MenuItem>
-                            : <MenuItem value={coin.id} key={coin.id}>{coin.description}</MenuItem>
-                        })
-                    }
-                </Select>
-            </Box>
-            {quotationRows.length > 0 
-                ? <QuotationTable 
-                    rows={quotationRows}
-                    page={quotationsPage - 1}
-                    rowsPerPage={quotationsRowsPerPage}
-                    count={quotationsCount}
-                    onPageChange={handleSetPage}
-                    onRowsPerPageChange={handlesetRowsPerPage}
-                    />
-                : ""
-            }
-        </Container>
+        <Page title="Realtimequotation: Home">
+            <Container sx={{display: "flex", flexDirection: "column", rowGap: "50px", paddingTop: "40px"}}>
+                {!isLoggedIn && <Navigate to="/login" replace={true}/>}
+                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                    <Typography variant="h4" component="h4" sx={{color: "black", fontWeight: "bold"}}>
+                        Moedas
+                    </Typography>
+                    <IconButton aria-label="reload" onClick={() => {getCoins()}}>
+                        <CachedIcon/>
+                    </IconButton>
+                </Box>
+                <Box className="home-coin-container">
+                    {coins.map((coin, i) => <CoinCard name={coin.name} price={coin.price} description={coin.description} key={i}></CoinCard>)}
+                </Box>
+                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                    <Typography variant="h4" component="h4" sx={{color: "black", fontWeight: "bold"}}>
+                        Cotações
+                    </Typography>
+                    <Select
+                        value={coinSelect}
+                        onChange={handleChange}
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Select Coin' }}
+                        sx={{width: "200px"}}
+                        >
+                        {coins.map((coin, i) => {
+                            return i === 0
+                                ? <MenuItem value={coin.id} key={coin.id} selected={true}>{coin.description}</MenuItem>
+                                : <MenuItem value={coin.id} key={coin.id}>{coin.description}</MenuItem>
+                            })
+                        }
+                    </Select>
+                </Box>
+                {quotationRows.length > 0 
+                    ? <QuotationTable 
+                        rows={quotationRows}
+                        page={quotationsPage - 1}
+                        rowsPerPage={quotationsRowsPerPage}
+                        count={quotationsCount}
+                        onPageChange={handleSetPage}
+                        onRowsPerPageChange={handlesetRowsPerPage}
+                        />
+                    : ""
+                }
+            </Container>
+        </Page>
     )
 }
 

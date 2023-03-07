@@ -11,7 +11,7 @@ const Root = props => {
         <Box sx={{ display: 'flex', backgroundColor: "rgba(236, 246, 255, 0.3);" , minHeight: "100vh"}}>
             <CssBaseline />
             <NavBar></NavBar>
-            <Box component="main" sx={{ flexGrow: 1, p: 3, padding: 0 }}>
+            <Box component="main" sx={{ flexGrow: 1, p: 3, padding: 0 , maxWidth: "100vw"}}>
                 <Toolbar />
                 <Suspense fallback={<LinearProgress />}>
                     <Outlet />
