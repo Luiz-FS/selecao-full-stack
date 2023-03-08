@@ -4,7 +4,7 @@
 }
 
 .quotation-table-container {
-    min-width: 700px;
+    /* min-width: 700px; */
     border-color: white;
     -webkit-border-vertical-spacing: 12px !important;
     -webkit-border-horizontal-spacing: 5px !important;
@@ -50,4 +50,30 @@
     line-height: 2;
     background-color: #F4C23B;
     border-radius: 8px;
+}
+
+@media screen and (max-width: 600px){
+    .quotation-table-container th, tr, td {
+        font-size: 14px !important;
+    }
+    .quotation-table-column-variance-span {
+        line-height: 2.6;
+    }
+}
+
+@media screen and (max-width: 420px){
+    .quotation-table-container th, tr, td {
+        font-size: 9px !important;
+    }
+    .quotation-table-column-variance-span {
+        line-height: 4;
+    }
+
+    .quotation-table-container th, tr, td {
+        padding: 10px !important;
+    }
+
+    .MuiTablePagination-actions, .MuiTablePagination-displayedRows, .MuiTablePagination-select, .MuiTablePagination-selectLabel {
+        font-size: 10px !important;
+    }
 }
