@@ -71,8 +71,8 @@ const Home = () => {
         <Page title="Realtimequotation: Home">
             <Container sx={{display: "flex", flexDirection: "column", rowGap: "50px", paddingTop: "40px"}}>
                 {!isLoggedIn && <Navigate to="/login" replace={true}/>}
-                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                    <Typography variant="h4" component="h4" sx={{color: "black", fontWeight: "bold"}}>
+                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                    <Typography variant={window.screen.width > 600 ? "h4" : "h5"} component={window.screen.width > 600 ? "h4" : "h5"} sx={{color: "black", fontWeight: "bold"}}>
                         Moedas
                     </Typography>
                     <IconButton aria-label="reload" onClick={() => {getCoins()}}>
@@ -82,8 +82,8 @@ const Home = () => {
                 <Box className="home-coin-container">
                     {coins.map((coin, i) => <CoinCard name={coin.name} price={coin.price} description={coin.description} key={i}></CoinCard>)}
                 </Box>
-                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                    <Typography variant="h4" component="h4" sx={{color: "black", fontWeight: "bold"}}>
+                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                    <Typography variant={window.screen.width > 600 ? "h4" : "h5"} component={window.screen.width > 600 ? "h4" : "h5"} sx={{color: "black", fontWeight: "bold"}}>
                         Cotações
                     </Typography>
                     <Select
