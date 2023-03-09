@@ -224,7 +224,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     "task-collect-coin-quotation-history": {
         "task": "apps.quotation.tasks.collect_coin_quotation_history",
-        "schedule": timedelta(days=1),
+        "schedule": crontab(minute=30, hour=0),
         "args": (1,),
     },
 }
